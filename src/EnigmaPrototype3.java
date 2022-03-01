@@ -19,13 +19,13 @@ public class EnigmaPrototype3 {
     }
 
     public int[] caesarEncryption(String userInput) {
-        int[] array1 = new int[userInput.length()];
+        int[] arrayStoreUserInput = new int[userInput.length()];
         for (int i = 0; i < userInput.length(); i++) {
-            char charAtIndex = userInput.charAt(i);
-            int indexOfChar = charToNumber(charAtIndex);
-            array1[i] = indexOfChar;
+//            char charAtIndex = userInput.charAt(i);
+//            int indexOfChar = charToNumber(charAtIndex);
+            arrayStoreUserInput[i] = charToNumber(userInput.charAt(i));
         }
-        return array1;
+        return arrayStoreUserInput;
     }
 
     public char NumberToChar(int number) {
@@ -35,6 +35,7 @@ public class EnigmaPrototype3 {
 
     public static void main(String[] args) {
         EnigmaPrototype3 prototype = new EnigmaPrototype3();
+
         String input = prototype.userInput();
         int[] result = prototype.caesarEncryption(input);
         System.out.println(Arrays.toString(result));
