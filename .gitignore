@@ -1,0 +1,4 @@
+out/
+# Undlad intelli specifikke filer
+.idea/
+*.iml
