@@ -3,12 +3,11 @@ import java.util.Scanner;
 
 public class EnigmaPrototype {
 
-    Scanner input = new Scanner(System.in);
-    String alfabet = " abcdefghijklmnopqrstuvxyzæøå";
+    //Scanner input = new Scanner(System.in);
+    String alfabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
 
     public int caesarEncryption(char bogstav) {
-        int indexOfChar = 0;
-        indexOfChar = alfabet.indexOf(bogstav);
+        int indexOfChar = alfabet.indexOf(bogstav);
         return indexOfChar;
     }
 

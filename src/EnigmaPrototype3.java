@@ -1,27 +1,42 @@
-//import java.lang.reflect.Array;
-//import java.util.Arrays;
-//import java.util.Scanner;
-//
-//public class EnigmaPrototype3 {
-//    Scanner caesarEncryptInput = new Scanner(System.in);
-//    String alfabet = " abcdefghijklmnopqrstuvxyzæøå";
-//    String word = caesarEncryptInput.nextLine();
-//
-//    public int caesarEncryption(String word) {
-//        System.out.println("Hello. Please type in a word you would like to encrypt!");
-//        int[] array1 = {word.length()};
-//        System.out.println(Arrays.toString(array1));
-//
-//        for (int i = 0; i < word.length(); i++) {
-//            String charAtIndex = word.charAt(i);
-//            charAtIndex.indexOf();
-//            array1[i] = i+1;
-//        } return -1;
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        System.out.println(new EnigmaPrototype3().caesarEncryption());
-//
-//    }
-//}
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class EnigmaPrototype3 {
+
+    Scanner input = new Scanner(System.in);
+    String alfabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
+
+    public String userInput() {
+        System.out.println("Pls input the word you would like to encrypt");
+        String userInput = input.nextLine().toUpperCase(Locale.ROOT);
+        return userInput;
+    }
+
+    public int charToNumber(char bogstav) {
+        int indexOfChar = alfabet.indexOf(bogstav);
+        return indexOfChar;
+    }
+
+    public int[] caesarEncryption(String userInput) {
+        int[] array1 = new int[userInput.length()];
+        for (int i = 0; i < userInput.length(); i++) {
+            char charAtIndex = userInput.charAt(i);
+            int indexOfChar = charToNumber(charAtIndex);
+            array1[i] = indexOfChar;
+        }
+        return array1;
+    }
+
+    public char NumberToChar(int number) {
+        char charAtIndex = alfabet.charAt(number);
+        return charAtIndex;
+    }
+
+    public static void main(String[] args) {
+        EnigmaPrototype3 prototype = new EnigmaPrototype3();
+        String input = prototype.userInput();
+        int[] result = prototype.caesarEncryption(input);
+        System.out.println(Arrays.toString(result));
+    }
+}
