@@ -6,25 +6,31 @@ import java.util.Scanner;
 public class EnigmaPrototype3 {
 
     public static void main(String[] args) {
+
         EnigmaPrototype3 prototype = new EnigmaPrototype3();
+        while (prototype.isRunning == true) {
+            String answer = prototype.encryptOrDecrypt();
+            String sentenceInput = prototype.userSentence();
+            int shiftValue = prototype.askShiftValue();
 
-        String answer = prototype.encryptOrDecrypt();
-        String sentenceInput = prototype.userSentence();
-        int shiftValue = prototype.askShiftValue();
+            if (answer.equalsIgnoreCase("ENCRYPT")) {
+                String wordEncrypted = prototype.encryption(sentenceInput, shiftValue);
+                System.out.println("Your word has been encrypted. " + sentenceInput + " has been encrypted into: " + wordEncrypted);
 
-        if (answer.equalsIgnoreCase("ENCRYPT")) {
-            String encryptedWord = prototype.encryption(sentenceInput, shiftValue);
-            System.out.println("Your word has been encrypted. " + sentenceInput + " has been encrypted into: " + encryptedWord);
+            } else if (answer.equalsIgnoreCase("DECRYPT")) {
+                String decryptedWord = prototype.decryption(sentenceInput, shiftValue);
+                System.out.println("Your word has been encrypted. " + sentenceInput + " has been decrypted into " + decryptedWord);
+            } else
+                System.out.println("Sorry that input isn't valid");
 
-        } else
-            System.out.println("decrypt");
-        // caesar decryption metode TODO
-
+            prototype.isRunning = prototype.continueProgram();
+        }
     }
 
+    boolean isRunning = true;
     Scanner input = new Scanner(System.in);
     String alfabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
-    boolean isRunning = true;
+
 
     public String encryptOrDecrypt() {
         System.out.println("Hello. Welcome to the caesar encryption machine.");
@@ -34,7 +40,7 @@ public class EnigmaPrototype3 {
     }
 
     public int askShiftValue() {
-        System.out.println("Hello, please enter a shift value");
+        System.out.println("Hello, please enter a positive shift value"); // kan laves senere så den tager både negativ og positiv value
         int userInput = input.nextInt();
         return userInput;
     }
@@ -55,14 +61,19 @@ public class EnigmaPrototype3 {
     }
 
     public int[] shiftNumbers(int[] arrayOfNumbers, int shiftNumber) {
-        for (int i = 0; i < arrayOfNumbers.length; i++) {
-            arrayOfNumbers[i] = arrayOfNumbers[i] + shiftNumber;
+//        if (encryptOrDecrypt().equalsIgnoreCase("decrypt")) {
+//            for (int i = 0; i < arrayOfNumbers.length; i++) {
+//                arrayOfNumbers[i] = arrayOfNumbers[i] - shiftNumber;
+//            }
+//        } else if (encryptOrDecrypt().equalsIgnoreCase("encrypt")) {
+            for (int i = 0; i < arrayOfNumbers.length; i++) {
+                arrayOfNumbers[i] = arrayOfNumbers[i] + shiftNumber;
+            } return arrayOfNumbers;
+
         }
-        return arrayOfNumbers;
-    }
+//    }
 
     public String makeStringFromShiftValues(int[] arrayOfShiftNumbers) {
-        //String[] stringShiftValues = new String[arrayOfShiftNumbers.length];
         String encryptedMessage = "";
         char x;
         for (int i = 0; i < arrayOfShiftNumbers.length; i++) {
@@ -79,6 +90,13 @@ public class EnigmaPrototype3 {
         return encryptedMessage;
     }
 
+    public String decryption(String encryptedMessage, int shiftValue) {
+        int[] encryptedStringIntoNumbers = stringIntoNumbers(encryptedMessage);
+        int[] encryptedNumbersShifted = shiftNumbers(encryptedStringIntoNumbers, shiftValue);
+        String decryptedMessage = makeStringFromShiftValues(encryptedNumbersShifted);
+        return decryptedMessage;
+    }
+
     public int letterToNumber(char bogstav) {
         int indexOfChar = alfabet.indexOf(bogstav);
         return indexOfChar;
@@ -89,5 +107,15 @@ public class EnigmaPrototype3 {
         return charAtIndex;
     }
 
-
+    public boolean continueProgram() {
+        System.out.println("Would you like to continue the program? Answer yes or no.");
+        String userInput = input.nextLine();
+        input.nextLine();
+        if (userInput.equalsIgnoreCase("yes")) {
+            isRunning = true;
+        } else if (userInput.equalsIgnoreCase("no")) {
+            isRunning = false;
+        }
+        return isRunning;
+    }
 }
