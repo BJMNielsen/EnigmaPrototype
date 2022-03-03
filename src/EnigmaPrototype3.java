@@ -20,6 +20,7 @@ public class EnigmaPrototype3 {
             } else if (answer.equalsIgnoreCase("DECRYPT")) {
                 String decryptedWord = prototype.decryption(sentenceInput, shiftValue);
                 System.out.println("Your word has been encrypted. " + sentenceInput + " has been decrypted into " + decryptedWord);
+
             } else
                 System.out.println("Sorry that input isn't valid");
 
