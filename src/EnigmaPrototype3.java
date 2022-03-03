@@ -12,7 +12,7 @@ public class EnigmaPrototype3 {
             String answer = prototype.encryptOrDecrypt();
             String sentenceInput = prototype.userSentence();
             int shiftValue = prototype.askShiftValue();
-//sdasd
+
             if (answer.equalsIgnoreCase("ENCRYPT")) {
                 String wordEncrypted = prototype.encryption(sentenceInput, shiftValue);
                 System.out.println("Your word has been encrypted. " + sentenceInput + " has been encrypted into: " + wordEncrypted);
@@ -55,24 +55,23 @@ public class EnigmaPrototype3 {
     public int[] stringIntoNumbers(String userInput) {
         int[] arrayStoreUserInput = new int[userInput.length()];
         for (int i = 0; i < userInput.length(); i++) {
-            ;
             arrayStoreUserInput[i] = letterToNumber(userInput.charAt(i));
         }
         return arrayStoreUserInput;
     }
 
-    public int[] shiftNumbers(int[] arrayOfNumbers, int shiftNumber) {
-//        if (encryptOrDecrypt().equalsIgnoreCase("decrypt")) {
-//            for (int i = 0; i < arrayOfNumbers.length; i++) {
-//                arrayOfNumbers[i] = arrayOfNumbers[i] - shiftNumber;
-//            }
-//        } else if (encryptOrDecrypt().equalsIgnoreCase("encrypt")) {
+    public int[] shiftNumbers(int[] arrayOfNumbers, int shiftNumber, String answer) {
+
+        if (answer.equalsIgnoreCase("decrypt")) {
+            for (int i = 0; i < arrayOfNumbers.length; i++) {
+                arrayOfNumbers[i] = arrayOfNumbers[i] - shiftNumber;
+            }
+        } else if (answer.equalsIgnoreCase("encrypt")) {
             for (int i = 0; i < arrayOfNumbers.length; i++) {
                 arrayOfNumbers[i] = arrayOfNumbers[i] + shiftNumber;
-            } return arrayOfNumbers;
-
-        }
-//    }
+            }
+        } return arrayOfNumbers;
+    }
 
     public String makeStringFromShiftValues(int[] arrayOfShiftNumbers) {
         String encryptedMessage = "";
@@ -86,14 +85,14 @@ public class EnigmaPrototype3 {
 
     public String encryption(String sentenceInput, int shiftValue) {
         int[] stringIntoNumbers = stringIntoNumbers(sentenceInput);
-        int[] shiftedNumbers = shiftNumbers(stringIntoNumbers, shiftValue);
+        int[] shiftedNumbers = shiftNumbers(stringIntoNumbers, shiftValue, encryptOrDecrypt());
         String encryptedMessage = makeStringFromShiftValues(shiftedNumbers);
         return encryptedMessage;
     }
 
     public String decryption(String encryptedMessage, int shiftValue) {
         int[] encryptedStringIntoNumbers = stringIntoNumbers(encryptedMessage);
-        int[] encryptedNumbersShifted = shiftNumbers(encryptedStringIntoNumbers, shiftValue);
+        int[] encryptedNumbersShifted = shiftNumbers(encryptedStringIntoNumbers, shiftValue, encryptOrDecrypt());
         String decryptedMessage = makeStringFromShiftValues(encryptedNumbersShifted);
         return decryptedMessage;
     }
