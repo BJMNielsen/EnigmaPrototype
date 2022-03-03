@@ -12,7 +12,7 @@ public class EnigmaPrototype3 {
             String answer = prototype.encryptOrDecrypt();
             String sentenceInput = prototype.userSentence();
             int shiftValue = prototype.askShiftValue();
-
+//sdasd
             if (answer.equalsIgnoreCase("ENCRYPT")) {
                 String wordEncrypted = prototype.encryption(sentenceInput, shiftValue);
                 System.out.println("Your word has been encrypted. " + sentenceInput + " has been encrypted into: " + wordEncrypted);
